@@ -9,6 +9,9 @@ import android.widget.Toast;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity {
     Button car_1 , car_2, car_3, car_4, car_6, car_5;
 
@@ -16,6 +19,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        for(int i=0; i<6; i++) {
+            DatabaseReference myRef = database.getReference("ParkingLot" + "/" + i);
+
+            myRef.setValue("0");
+        }
+
         setContentView(R.layout.activity_main);
 
          car_1 = (Button) findViewById(R.id.car_1);
